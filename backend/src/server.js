@@ -4,12 +4,16 @@ import dotenv from "dotenv";
 
 import authRoutes from "./routes/auth.route.js";
 
+import { connectDB } from "./lib/db.js";
+
 dotenv.config();
 
 const app = express();
 const __dirname = path.resolve();
 
 const PORT = process.env.PORT;
+
+app.use(express.json()); // Parses json from request body
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Health check passed" });
@@ -26,4 +30,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => console.log("Server started on port", PORT));
+app.listen(PORT, () => {
+  console.log("Server started on port", PORT);
+  connectDB();
+});

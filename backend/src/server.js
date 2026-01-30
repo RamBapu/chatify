@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import path from "path";
 import { ENV } from "./lib/env.js";
 
@@ -12,6 +13,7 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT;
 
 app.use(express.json()); // Parses json from request body
+app.use(cookieParser());
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Health check passed" });

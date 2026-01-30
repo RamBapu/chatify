@@ -4,6 +4,7 @@ import path from "path";
 import { ENV } from "./lib/env.js";
 
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 
 import { connectDB } from "./lib/db.js";
 
@@ -20,6 +21,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 // deployment code
 if (ENV.NODE_ENV === "production") {

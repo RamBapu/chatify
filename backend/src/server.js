@@ -1,17 +1,15 @@
 import express from "express";
 import path from "path";
-import dotenv from "dotenv";
+import { ENV } from "./lib/env.js";
 
 import authRoutes from "./routes/auth.route.js";
 
 import { connectDB } from "./lib/db.js";
 
-dotenv.config();
-
 const app = express();
 const __dirname = path.resolve();
 
-const PORT = process.env.PORT;
+const PORT = ENV.PORT;
 
 app.use(express.json()); // Parses json from request body
 
@@ -22,7 +20,7 @@ app.get("/health", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // deployment code
-if (process.env.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
   app.get("*", (_, res) => {

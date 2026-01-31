@@ -1,4 +1,5 @@
 import cloudinary from "../lib/cloudinary.js";
+import { getRecieverSocketId, io } from "../lib/socket.js";
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
 
@@ -70,7 +71,11 @@ export const sendMessage = async (req, res) => {
 
     const savedMessage = await newMessage.save();
 
-    // todo: send message to user in real time if user is online
+    // Send message in real time if user is online - socket.io
+    const recieverSocketIds = getRecieverSocketId(id);
+    if (recieverSocketIds && recieverSocketIds.size > 0) {
+      io.to([...recieverSocketIds]).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(savedMessage);
   } catch (error) {

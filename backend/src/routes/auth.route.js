@@ -10,8 +10,7 @@ import { arcjetProtection } from "../middlewares/arcjet.middleware.js";
 
 const router = express.Router();
 
-// todo: uncomment after finishing the project
-// router.use(arcjetProtection); // For Rate limiting
+router.use(arcjetProtection); // For Rate limiting
 
 router.post("/signup", signUp);
 router.post("/login", login);

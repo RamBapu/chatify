@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// todo: baseURL change in production
 export const axiosInstance = axios.create({
   // send the request to same url with /api if both frontend and backend are deployed in the same domain
   baseURL:

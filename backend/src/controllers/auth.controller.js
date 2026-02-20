@@ -38,7 +38,9 @@ export const signUp = async (req, res) => {
 
     if (newUser) {
       const savedUser = await newUser.save();
-      generateToken(savedUser._id, res); // _id comes from mongodb id
+      const token = generateToken(savedUser._id, res); // _id comes from mongodb id
+      if (!token)
+        return res.status(500).json({ error: "Unable to generate token" });
 
       res.status(201).json({
         _id: savedUser._id,
@@ -80,7 +82,9 @@ export const login = async (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json({ error: "Invalid credentials" });
 
-    generateToken(user._id, res);
+    const token = generateToken(user._id, res);
+    if (!token)
+      return res.status(500).json({ error: "Unable to generate token" });
 
     res.status(200).json({
       _id: user.id,

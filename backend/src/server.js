@@ -14,9 +14,9 @@ const __dirname = path.resolve();
 
 const PORT = ENV.PORT;
 
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true })); // allow request from frontend with cookies
 app.use(express.json({ limit: "5mb" })); // Parses json from request body
 app.use(cookieParser()); // To extract userId from cookies
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true })); // allow request from frontend with cookies
 
 app.get("/", (req, res) => {
   res.json({

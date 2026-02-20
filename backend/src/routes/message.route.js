@@ -7,17 +7,17 @@ import {
   sendMessage,
   getAllChatPartners,
 } from "../controllers/message.controller.js";
-import { connectDB } from "../lib/db.js";
+// import { connectDB } from "../lib/db.js";
 
 const router = express.Router();
 
-// For serverless functions - deployed in Vercel
-router.use(
-  app.use(async (req, res, next) => {
-    await connectDB();
-    next();
-  }),
-);
+// // For serverless functions - deployed in Vercel
+// router.use(
+//   app.use(async (req, res, next) => {
+//     await connectDB();
+//     next();
+//   }),
+// );
 
 // the middlewares execute in order - so requests get rate-limited first, then authenticated.
 // this is actually more efficient since unauthenticated requests get blocked by rate limiting before hitting the auth middleware.

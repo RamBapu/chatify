@@ -18,15 +18,15 @@ app.use(cors({ origin: ENV.CLIENT_URL, credentials: true })); // allow request f
 app.use(express.json({ limit: "5mb" })); // Parses json from request body
 app.use(cookieParser()); // To extract userId from cookies
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to Chatify API - Powered by Mongoose & MongoDB",
-    endpoints: {
-      users: "/api/users",
-      messages: "/api/messages",
-    },
-  });
-});
+// app.get("/", (req, res) => {
+//   res.json({
+//     message: "Welcome to Chatify API - Powered by Mongoose & MongoDB",
+//     endpoints: {
+//       users: "/api/users",
+//       messages: "/api/messages",
+//     },
+//   });
+// });
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Health check passed" });
